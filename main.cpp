@@ -35,8 +35,15 @@ int main(int argc, char* argv[]) {
     ifstream inputFile;
     inputFile.open(filename);  // opening the file for reading
     string line;
-    if(getline(inputFile, line))  //gets the next line from the file and saves it in 'line', if there is one
+
+    if(!inputFile) { // file couldn't be opened
+        cerr << "Error: file could not be opened" << endl;
+        exit(1);
+    }
+
+    while(getline(inputFile, line))  //gets the next line from the file and saves it in 'line', if there is one
     {
+        cout << line << endl;
         stringstream sst(line);  //stringstream allows us to parse the line token by token (kind of like a Scanner in Java)
         string token;
         int counter = 0;
