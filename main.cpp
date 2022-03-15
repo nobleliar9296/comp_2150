@@ -2,11 +2,11 @@
 #include <sstream> //necessary for using stringstream
 #include <fstream> //necessary to use ifstream (to open a file)
 #include <string>
-#include "cmake-build-debug/Listitem.h"
-#include "cmake-build-debug/Intitem.h"
-#include "cmake-build-debug/Node.h"
-#include "cmake-build-debug/Stringitem.h"
-#include "cmake-build-debug/Linkedlist.h"
+#include "Listitem.h"
+#include "Intitem.h"
+#include "Node.h"
+#include "Stringitem.h"
+#include "Linkedlist.h"
 
 using namespace std;
 
