@@ -7,6 +7,8 @@
 #include "Node.h"
 #include "Stringitem.h"
 #include "Linkedlist.h"
+#include "Stack.h"
+#include "Queue.h"
 
 using namespace std;
 
@@ -14,6 +16,42 @@ using namespace std;
 int main(int argc, char* argv[]) {
     std::cout << "Hello, World!" << std::endl;
 
+    Listitem *li0 = new Intitem(0);
+    Listitem *li1 = new Intitem(1);
+    Listitem *li2 = new Intitem(2);
+    Listitem *li3 = new Intitem(3);
+
+
+    Node *test0 = new Node(li0, nullptr);
+    Node *test1 = new Node(li1, nullptr);
+    Node *test2 = new Node(li2, nullptr);
+    Node *test3 = new Node(li3, nullptr);
+
+
+    test0->print();
+    test1->print();
+    test2->print();
+    test3->print();
+
+    cout << "Stack testing start\n";
+    Queue *temp = new Queue();
+
+    temp->enterQueue(test1);
+    temp->enterQueue(test0);
+
+    temp->toString();
+
+    temp->leaveQueue();
+    temp->leaveQueue();
+    temp->leaveQueue();
+
+    temp->toString();
+
+    cout << "End of testing" << endl;
+
+}
+
+    /*
     // testing for file reader input :)
 
     if(argc != 3)
@@ -72,9 +110,9 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
-
+    */
 /* Used for testing of linkedlist
- * Listitem *li0 = new Intitem(0);
+    Listitem *li0 = new Intitem(0);
     Listitem *li1 = new Intitem(1);
     Listitem *li2 = new Intitem(2);
     Listitem *li3 = new Intitem(3);

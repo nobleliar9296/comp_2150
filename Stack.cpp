@@ -1,5 +1,5 @@
 /*************************************************************************
- * @Stack
+ * @class Stack
  * @author Gundeep Singh Sidhu
  *
  * @section DESCRIPTION
