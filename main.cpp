@@ -9,6 +9,7 @@
 #include "Linkedlist.h"
 #include "Stack.h"
 #include "Queue.h"
+#include "PriorityQueue.h"
 
 using namespace std;
 
@@ -34,16 +35,21 @@ int main(int argc, char* argv[]) {
     test3->print();
 
     cout << "Stack testing start\n";
-    Queue *temp = new Queue();
+    PriorityQueue *temp = new PriorityQueue();
 
-    temp->enterQueue(test1);
-    temp->enterQueue(test0);
+    temp->add(test1);
+    temp->add(test0);
 
     temp->toString();
 
-    temp->leaveQueue();
-    temp->leaveQueue();
-    temp->leaveQueue();
+    temp->addLast(test3);
+    temp->addBefore(test2, test3);
+
+    temp->deletes(test1);
+    temp->deletes(test3);
+    temp->addLast(test3);
+
+    temp->deletes(test0);
 
     temp->toString();
 

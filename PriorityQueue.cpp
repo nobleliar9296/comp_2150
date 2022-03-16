@@ -7,6 +7,9 @@
 
 PriorityQueue::PriorityQueue() : Queue() {}
 
+void PriorityQueue::add(Node *toAdd) {
+    push(toAdd);
+}
 /***************************************************************************
  * Purpose: add the node passed in to the last of the list
  * @param
@@ -89,8 +92,6 @@ Node* PriorityQueue::deletes(Node *toDelete) {
 
     // if the case where it is the last element in the list
     if (iter->getNext() == nullptr) {
-        if ()
-        last = prev;
         prev->setNext(nullptr);
         return iter;
     }
