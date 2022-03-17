@@ -4,7 +4,7 @@
 
 #include "Queue.h"
 
-class PriorityQueue : public Queue {
+class PriorityQueue{
 
 private:
     Linkedlist *list;

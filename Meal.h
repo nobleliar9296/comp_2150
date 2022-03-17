@@ -11,7 +11,6 @@ using namespace std;
 class Meal : public Listitem {
 private:
     int orderId;
-
     int expiry;
     string meal;
     int ingridients;
@@ -26,6 +25,7 @@ public:
     float getPrice();
     int getOrderId();
     int getExpiry();
+    void setOrderId(int id);
 
     // prints when the order is
     void toString();

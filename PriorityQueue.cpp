@@ -30,7 +30,7 @@ void PriorityQueue::add(Node *toAdd, Node *before) {
     list->addbefore(toAdd, before);
 }
 
-
+// delete the item in the linkedlist
 Node* PriorityQueue::deletes(Node *toDelete) {
     return list->deletes(toDelete);
 }

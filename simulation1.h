@@ -8,4 +8,9 @@
 
 class simulation1 : public Simulation {
 
+private:
+
+
+public:
+
 };

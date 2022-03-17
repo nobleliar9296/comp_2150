@@ -10,6 +10,7 @@ using namespace std;
 
 class Simulation {
 private:
+    int orderId;
     int numOrders;
     int revenue;
     int time;
@@ -21,5 +22,5 @@ public:
 
     void read(string);
 
-    void toString();
+    void read(int exp, string meals, int indg, int times);
 };

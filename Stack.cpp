@@ -57,9 +57,7 @@ bool Stack::isEmpty() {
 
 // For debugging purposes
 void Stack::toString() {
-
-    toString();
-
+    list->toString();
 }
 
 

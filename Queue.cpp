@@ -7,15 +7,17 @@
 
 Queue::Queue() : list( new Linkedlist() ){}
 
+// item will enter the queue
 void Queue::enter(Node *toAdd) {
     list->addItem(toAdd);
 }
 
+// exit the queue
 Node * Queue::leave() {
     return list->deleteLast();
-
 }
 
+// check is the queue is empty
 bool Queue::isEmpty() {
-    return ( peek() == nullptr );
+    return list->isEmpty();
 }

@@ -14,6 +14,10 @@ Meal::Meal(int orderNum, int exp, string meals, int indg, int times, float price
     time = times;
 }
 
+void Meal::setOrderId(int id) {
+    orderId = id;
+}
+
 int Meal::getOrderId() {
     return orderId;
 }

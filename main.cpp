@@ -3,26 +3,11 @@
 #include <fstream> //necessary to use ifstream (to open a file)
 #include <string>
 #include "Simulation.h"
+#include "Meal.h"
 
 using namespace std;
 
-// the time and price of all the dishes
-const string SALAD = "Salad";
-const int SALAD_TIME = 3;
-const float SALAD_COST = 6.99;
 
-const string BURGER = "Burger";
-const int BURGER_TIME = 4;
-const float BURGER_COST = 8.99;
-
-const string PIZZA = "Pizza";
-const int PIZZA_TIME = 6;
-const float PIZZA_COST = 12.99;
-
-const string STEW = "Stew";
-const int STEW_TIME = 7;
-const float STEW_COST = 14.99;
-// it will be better to store in a csv file for longer list and make a hashtable at run time
 
 int main(int argc, char* argv[]) {
 
@@ -43,9 +28,9 @@ int main(int argc, char* argv[]) {
     Simulation *sim;
     if ( numVersion == 1) {
         sim = new Simulation;
-    } if ( numVersion == 2) {
+    }else if ( numVersion == 2) {
         sim = new Simulation;
-    } if ( numVersion == 3) {
+    } else if ( numVersion == 3) {
         sim = new Simulation;
     } else {
         cerr << "Error: Version of program should be 1,2 or 3." << endl;
@@ -73,6 +58,7 @@ int main(int argc, char* argv[]) {
         int expiry = 0;
         string meal = "";
         int numIngredients = 0;
+        float price;
 
         while(sst >> token)  //grabing one token at a time, until there is no token left
         {
@@ -88,8 +74,12 @@ int main(int argc, char* argv[]) {
             }
             counter++;
         }
+
+        sim->read( expiry, meal, numIngredients, time, price)
         //To show that we grabbed all the relevant information:
         cout << "time=" << time << " expiry=" << expiry << " meal=" << meal << " numIngredients=" << numIngredients << endl;
+        Meal *temp = new Meal(0, expiry, meal, numIngredients, time, price);
+
     }
 
     return 0;
