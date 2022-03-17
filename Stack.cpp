@@ -8,7 +8,7 @@
  *************************************************************************/
 
 #include "Stack.h"
-#include "Node.h"
+#include "Linkedlist.h"
 
 #include <iostream>
 using namespace std;
@@ -16,7 +16,7 @@ using namespace std;
 
 //constructor
 Stack::Stack() {
-    head = nullptr;
+    list = new Linkedlist();
 }
 
 /************************************************************************
@@ -24,18 +24,7 @@ Stack::Stack() {
  * @param toAdd The node to be added at the top of the stack.
  ************************************************************************/
 void Stack::push(Node *toAdd) {
-
-    // invariant
-    toAdd->setNext(nullptr);
-
-    if ( head == nullptr ) {
-        head = toAdd;
-        return;
-    }
-
-    //point the item to add to the next item
-    toAdd->setNext(head);
-    head = toAdd; // point the head to the new item
+    list->addItem(toAdd);
 }
 
 /****************************************************************************
@@ -43,14 +32,8 @@ void Stack::push(Node *toAdd) {
  * @return Node that is returns at the top of the stack
  ****************************************************************************/
 Node *Stack::pop() {
-
-    if (head == nullptr) {
-        return nullptr;
-    }
-
-    Node *temp = head;
-    head = temp->getNext();
-
+    Node * temp = list->getHead();
+    list->deletes(temp);
     return temp;
 }
 
@@ -59,7 +42,7 @@ Node *Stack::pop() {
  * @return Node that is returns at the top of the stack
  **********************************************************************/
 Node *Stack::peek() {
-    return head;
+    return list->getHead();
 }
 
 /**********************************************************************
@@ -68,23 +51,14 @@ Node *Stack::peek() {
  * @return false if the stack is not empty
  **********************************************************************/
 bool Stack::isEmpty() {
-    return head==nullptr;
+    return list->getHead()==nullptr;
 }
 
 
 // For debugging purposes
 void Stack::toString() {
 
-    cout << "Start of the stack" << endl;
-
-    Node *iter = head;
-
-    while(iter != nullptr) {
-        iter->toString();
-        iter = iter->getNext();
-    }
-
-    cout << "end of the stack" << endl;
+    toString();
 
 }
 

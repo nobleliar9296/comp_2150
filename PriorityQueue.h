@@ -13,9 +13,8 @@ public:
 
     PriorityQueue();
 
-    void add(Node *);
+    void add(Node *, Node *);
     void addLast(Node *);
-    void addBefore(Node *, Node *);
     Node *deletes(Node*);
 
 };

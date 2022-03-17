@@ -9,12 +9,12 @@
 
 #pragma once
 
-class Node;
+#include "Linkedlist.h"
 
 class Stack {
 
 private:
-    Node *head;
+    Linkedlist *list;
 
 public :
 

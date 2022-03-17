@@ -2,58 +2,97 @@
 #include <sstream> //necessary for using stringstream
 #include <fstream> //necessary to use ifstream (to open a file)
 #include <string>
-#include "Listitem.h"
-#include "Intitem.h"
-#include "Node.h"
-#include "Stringitem.h"
-#include "Linkedlist.h"
-#include "Stack.h"
-#include "Queue.h"
-#include "PriorityQueue.h"
+#include "Simulation.h"
 
 using namespace std;
 
+// the time and price of all the dishes
+const string SALAD = "Salad";
+const int SALAD_TIME = 3;
+const float SALAD_COST = 6.99;
+
+const string BURGER = "Burger";
+const int BURGER_TIME = 4;
+const float BURGER_COST = 8.99;
+
+const string PIZZA = "Pizza";
+const int PIZZA_TIME = 6;
+const float PIZZA_COST = 12.99;
+
+const string STEW = "Stew";
+const int STEW_TIME = 7;
+const float STEW_COST = 14.99;
+// it will be better to store in a csv file for longer list and make a hashtable at run time
 
 int main(int argc, char* argv[]) {
-    std::cout << "Hello, World!" << std::endl;
 
-    Listitem *li0 = new Intitem(0);
-    Listitem *li1 = new Intitem(1);
-    Listitem *li2 = new Intitem(2);
-    Listitem *li3 = new Intitem(3);
+    if(argc != 3)
+    {
+        cout<<"USAGE: FileReadingExample.exe filename simulationType"<<endl;
+        cout<<"where simulationType is either 1, 2 or 3."<<endl;
+        return 0;
+    }
 
+    string filename = argv[1];
+    string version = argv[2];
 
-    Node *test0 = new Node(li0, nullptr);
-    Node *test1 = new Node(li1, nullptr);
-    Node *test2 = new Node(li2, nullptr);
-    Node *test3 = new Node(li3, nullptr);
+    cout << "The filename is: " << filename << endl;
+    cout << "The version selected is: " << version <<endl;
 
+    int numVersion = stoi(version);
+    Simulation *sim;
+    if ( numVersion == 1) {
+        sim = new Simulation;
+    } if ( numVersion == 2) {
+        sim = new Simulation;
+    } if ( numVersion == 3) {
+        sim = new Simulation;
+    } else {
+        cerr << "Error: Version of program should be 1,2 or 3." << endl;
+        exit(1);
+    }
+    //
+    //Opening the file, reading one line (just the first one of the file here) and parsing it
+    //
+    ifstream inputFile;
+    inputFile.open(filename);  // opening the file for reading
+    string line;
 
-    test0->print();
-    test1->print();
-    test2->print();
-    test3->print();
+    if(!inputFile) { // file couldn't be opened
+        cerr << "Error: file could not be opened" << endl;
+        exit(2);
+    }
 
-    cout << "Stack testing start\n";
-    PriorityQueue *temp = new PriorityQueue();
+    while(getline(inputFile, line))  //gets the next line from the file and saves it in 'line', if there is one
+    {
+        cout << line << endl;
+        stringstream sst(line);  //stringstream allows us to parse the line token by token (kind of like a Scanner in Java)
+        string token;
+        int counter = 0;
+        int time = 0;
+        int expiry = 0;
+        string meal = "";
+        int numIngredients = 0;
 
-    temp->add(test1);
-    temp->add(test0);
+        while(sst >> token)  //grabing one token at a time, until there is no token left
+        {
+            if(counter == 0) //reading time
+                time = stoi(token);
+            else if(counter == 1) //reading expiry
+                expiry = stoi(token);
+            else if(counter == 2) //reading meal type
+                meal = token;
+            else //counting ingredients from here (if counter > 2)
+            {
+                numIngredients++;
+            }
+            counter++;
+        }
+        //To show that we grabbed all the relevant information:
+        cout << "time=" << time << " expiry=" << expiry << " meal=" << meal << " numIngredients=" << numIngredients << endl;
+    }
 
-    temp->toString();
-
-    temp->addLast(test3);
-    temp->addBefore(test2, test3);
-
-    temp->deletes(test1);
-    temp->deletes(test3);
-    temp->addLast(test3);
-
-    temp->deletes(test0);
-
-    temp->toString();
-
-    cout << "End of testing" << endl;
+    return 0;
 
 }
 

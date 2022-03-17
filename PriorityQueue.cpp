@@ -7,9 +7,6 @@
 
 PriorityQueue::PriorityQueue() : Queue() {}
 
-void PriorityQueue::add(Node *toAdd) {
-    push(toAdd);
-}
 /***************************************************************************
  * Purpose: add the node passed in to the last of the list
  * @param
@@ -34,17 +31,18 @@ void PriorityQueue::addLast(Node *toAdd) {
  *              node.
  * This function also checks that toAdd and before are not null
  **************************************************************************/
-void PriorityQueue::addBefore(Node *toAdd, Node *before) {
+void PriorityQueue::add(Node *toAdd, Node *before) {
 
     Node *temp = peek();
 
     // invariant check
-    if (toAdd == nullptr || before == nullptr) {
+    if (toAdd == nullptr ) {
         return;
     }
 
     // check of the list is empty
-    if ( isEmpty() ) {
+    if ( isEmpty() || before == nullptr) {
+        enterQueue(toAdd);
         return;
     }
 

@@ -151,6 +151,10 @@ Node* Linkedlist::deleteLast() {
 
 }
 
+Node * Linkedlist::getHead() {
+    return head;
+}
+
 
 void Linkedlist::toString() {
 
