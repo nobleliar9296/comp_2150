@@ -7,7 +7,7 @@
 class PriorityQueue : public Queue {
 
 private:
-
+    Linkedlist *list;
 
 public:
 

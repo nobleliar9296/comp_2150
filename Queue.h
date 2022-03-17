@@ -8,18 +8,19 @@
  *************************************************************************/
 
 #pragma once
-#include "Stack.h"
 
-class Queue : public Stack{
+#include "Linkedlist.h"
+
+class Queue{
 
 private:
-    Node *last;
+    Linkedlist *list;
 
 public:
     Queue();
 
-    void enterQueue(Node*);
-    Node *leaveQueue();
+    void enter(Node*);
+    Node *leave();
     bool isEmpty();
 
 };

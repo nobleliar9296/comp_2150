@@ -167,3 +167,7 @@ void Linkedlist::toString() {
     }
 
 }
+
+bool Linkedlist::isEmpty() {
+    return head== nullptr;
+}

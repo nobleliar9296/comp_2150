@@ -24,8 +24,9 @@ public :
     void addLast(Node *toAdd);
     Node* deleteLast();
     Node* deletes(Node*);
+    Node *getHead();
+
+    bool isEmpty();
 
     void toString();
-
-    Node *getHead();
 };
