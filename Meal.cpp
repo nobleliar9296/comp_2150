@@ -10,7 +10,7 @@ Meal::Meal(int orderNum, int exp, string meals, int indg, int times, float price
     expiry = exp;
     price = prices;
     meal = meals;
-    ingridients - indg;
+    ingridients = indg;
     prepTime = times;
 }
 
@@ -35,5 +35,5 @@ float Meal::getPrice() {
 }
 
 void Meal::toString() {
-    cout << "Expiry:" << expiry << " - Meal:" << meal << " - Ingredients:" << ingridients << " - Prep prepTime: " << prepTime << " - Price:" << price;
+    cout << "Expiry: " << expiry << " - Meal: " << meal << " - Ingredients: " << ingridients << " - prepTime: " << prepTime << " - Price: $" << price;
 }

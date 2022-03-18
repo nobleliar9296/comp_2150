@@ -13,11 +13,12 @@ class Simulation {
 private:
     int orderId;
     int numOrders;
-    int revenue;
+    float revenue;
     int time;
     Queue *events;
     Meal *current;
     int startPrepTime;
+    int lastend;
 
 public:
 
@@ -27,7 +28,7 @@ public:
 
     void read(int exp, string meals, int indg, int times);
 
-    void arrival(Meal*);
+    void arrival(Meal *meal);
     void preperation();
     void CompleteService();
     void process(Meal*);
@@ -36,4 +37,8 @@ public:
     void purge();
 
     void end();
+
+    void newOrder(Meal *meal);
+
+    void finishOrders();
 };

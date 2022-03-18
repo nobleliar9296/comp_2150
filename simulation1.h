@@ -3,6 +3,9 @@
 //
 
 #pragma once
+#include <string>
+#include "PriorityQueue.h"
+#include "Meal.h"
 
 #include "Simulation.h"
 

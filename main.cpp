@@ -78,9 +78,11 @@ int main(int argc, char* argv[]) {
         sim->read( expiry, meal, numIngredients, time);
         //To show that we grabbed all the relevant information:
         cout << "prepTime=" << time << " expiry=" << expiry << " meal=" << meal << " numIngredients=" << numIngredients << endl;
-        Meal *temp = new Meal(0, expiry, meal, numIngredients, time, price);
 
     }
+
+    sim->finishOrders();
+    sim->end();
 
     return 0;
 
