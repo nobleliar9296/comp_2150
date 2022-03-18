@@ -95,10 +95,12 @@ void Simulation::process(Meal *meal) {
     }
 
     if (current != nullptr && current->getPrepTime() + startPrepTime > time && current != meal) {
+        lastend = time;
         arrival(meal);
         events->enter(new Node(meal, nullptr));
     }
     if (current == nullptr && current != meal) {
+        lastend = time;
         arrival(meal);
         events->enter(new Node(meal, nullptr));
         preperation();
@@ -142,18 +144,24 @@ void Simulation::preperation() {
     // if there is something to do and not doing it
     if (current == nullptr && !events->isEmpty()) {
         current = dynamic_cast<Meal *>(events->leave()->getValue());
-        if (current->getExpiry() > lastend) {
+        while (true) {
+            if (current->getExpiry() >= lastend) {
+                break;
+            }
+            if (events->isEmpty()) {
+                current = nullptr;
+                return;
+            }
+            current = dynamic_cast<Meal *>(events->leave()->getValue());
+        }
+
+        if (current->getExpiry() >= lastend) {
 
             // if the first time
             if (lastend == 0) {
                 startPrepTime = time;
             } else {
-                if (time > lastend) {
-                    startPrepTime = time;
-                    lastend = time;
-                } else {
-                    startPrepTime = lastend;
-                }
+                startPrepTime = lastend;
             }
             cout << "TIME: " << startPrepTime << ", Foodorder: " << current->getOrderId();
             cout << " is getting prepared by the chef!" << endl;
@@ -197,7 +205,7 @@ void Simulation::preperation() {
 
 void Simulation::CompleteService() {
 
-    if ( current->getPrepTime() + startPrepTime < time ) {
+    if ( current->getPrepTime() + startPrepTime <= time ) {
 
         // set the time of this dish end
         lastend = current->getPrepTime() + startPrepTime;

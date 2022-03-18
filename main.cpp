@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
 
         sim->read( expiry, meal, numIngredients, time);
         //To show that we grabbed all the relevant information:
-        cout << "prepTime=" << time << " expiry=" << expiry << " meal=" << meal << " numIngredients=" << numIngredients << endl;
+        //cout << "prepTime=" << time << " expiry=" << expiry << " meal=" << meal << " numIngredients=" << numIngredients << endl;
 
     }
 
