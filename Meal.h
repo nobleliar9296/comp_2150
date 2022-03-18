@@ -14,7 +14,7 @@ private:
     int expiry;
     string meal;
     int ingridients;
-    int time;
+    int prepTime;
     float price;
 public:
 
@@ -26,6 +26,7 @@ public:
     int getOrderId();
     int getExpiry();
     void setOrderId(int id);
+    int getPrepTime();
 
     // prints when the order is
     void toString();

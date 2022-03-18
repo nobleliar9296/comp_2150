@@ -5,6 +5,7 @@
 #pragma once
 #include <string>
 #include "PriorityQueue.h"
+#include "Meal.h"
 
 using namespace std;
 
@@ -14,7 +15,9 @@ private:
     int numOrders;
     int revenue;
     int time;
-    PriorityQueue *events;
+    Queue *events;
+    Meal *current;
+    int startPrepTime;
 
 public:
 
@@ -23,4 +26,14 @@ public:
     void read(string);
 
     void read(int exp, string meals, int indg, int times);
+
+    void arrival(Meal*);
+    void preperation();
+    void CompleteService();
+    void process(Meal*);
+    void wrapper(Meal*);
+
+    void purge();
+
+    void end();
 };

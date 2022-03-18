@@ -155,6 +155,10 @@ Node * Linkedlist::getHead() {
     return head;
 }
 
+Node * Linkedlist::getLast() {
+    return last;
+}
+
 
 void Linkedlist::toString() {
 

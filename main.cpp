@@ -60,9 +60,9 @@ int main(int argc, char* argv[]) {
         int numIngredients = 0;
         float price;
 
-        while(sst >> token)  //grabing one token at a time, until there is no token left
+        while(sst >> token)  //grabing one token at a prepTime, until there is no token left
         {
-            if(counter == 0) //reading time
+            if(counter == 0) //reading prepTime
                 time = stoi(token);
             else if(counter == 1) //reading expiry
                 expiry = stoi(token);
@@ -75,9 +75,9 @@ int main(int argc, char* argv[]) {
             counter++;
         }
 
-        sim->read( expiry, meal, numIngredients, time, price)
+        sim->read( expiry, meal, numIngredients, time);
         //To show that we grabbed all the relevant information:
-        cout << "time=" << time << " expiry=" << expiry << " meal=" << meal << " numIngredients=" << numIngredients << endl;
+        cout << "prepTime=" << time << " expiry=" << expiry << " meal=" << meal << " numIngredients=" << numIngredients << endl;
         Meal *temp = new Meal(0, expiry, meal, numIngredients, time, price);
 
     }
@@ -120,15 +120,15 @@ int main(int argc, char* argv[]) {
         stringstream sst(line);  //stringstream allows us to parse the line token by token (kind of like a Scanner in Java)
         string token;
         int counter = 0;
-        int time = 0;
+        int prepTime = 0;
         int expiry = 0;
         string meal = "";
         int numIngredients = 0;
 
-        while(sst >> token)  //grabing one token at a time, until there is no token left
+        while(sst >> token)  //grabing one token at a prepTime, until there is no token left
         {
-            if(counter == 0) //reading time
-                time = stoi(token);
+            if(counter == 0) //reading prepTime
+                prepTime = stoi(token);
             else if(counter == 1) //reading expiry
                 expiry = stoi(token);
             else if(counter == 2) //reading meal type
@@ -140,7 +140,7 @@ int main(int argc, char* argv[]) {
             counter++;
         }
         //To show that we grabbed all the relevant information:
-        cout << "time=" << time << " expiry=" << expiry << " meal=" << meal << " numIngredients=" << numIngredients << endl;
+        cout << "prepTime=" << prepTime << " expiry=" << expiry << " meal=" << meal << " numIngredients=" << numIngredients << endl;
     }
 
     return 0;

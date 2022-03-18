@@ -17,6 +17,10 @@ Node * Queue::leave() {
     return list->deleteLast();
 }
 
+Node * Queue::toLeave() {
+    return list->getLast();
+}
+
 // check is the queue is empty
 bool Queue::isEmpty() {
     return list->isEmpty();

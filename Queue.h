@@ -23,4 +23,5 @@ public:
     Node *leave();
     bool isEmpty();
 
+    Node *toLeave();
 };

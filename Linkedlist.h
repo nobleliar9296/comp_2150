@@ -29,4 +29,6 @@ public :
     bool isEmpty();
 
     void toString();
+
+    Node *getLast();
 };
