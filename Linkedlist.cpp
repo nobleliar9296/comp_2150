@@ -36,10 +36,16 @@ void Linkedlist::addItem(Node *toAdd) {
  **************************************************************************/
 void Linkedlist::addLast(Node *toAdd) {
     // invariant checks
-    if (toAdd != nullptr) {
-
+    if (toAdd == nullptr) {
+        return;
     }
     toAdd->setNext(nullptr);
+
+    if (head == nullptr) {
+        head = toAdd;
+        last = toAdd;
+        return;
+    }
 
     // add to the last of the list
     last->setNext(toAdd);
@@ -93,30 +99,45 @@ Node* Linkedlist::deletes(Node *toDelete) {
     // this is the value of rtn
     Node *rtn;
 
-    Node *iter = head;
-    Node *prev = nullptr;
-
-    if (head == last) {
+    if (head == last && head == toDelete) {
         rtn = head;
         head = nullptr;
         last = nullptr;
         return rtn;
     }
 
+    if (head == toDelete) {
+        rtn = head;
+        head = rtn->getNext();
+        return rtn;
+    }
+
+    if (last == toDelete) {
+        Node *temp = head;
+        while (head->getNext()->getNext() != nullptr) {
+            temp = temp->getNext();
+        }
+        rtn = temp->getNext();
+        temp->setNext(nullptr);
+        last = temp;
+        return rtn;
+    }
+
+    Node *iter = head;
+    Node *prev = head;
+
     while (iter != toDelete && iter != nullptr) {
         prev = iter;
         iter = iter->getNext();
     }
 
-    // if the case where it is the last element in the list
-    if (iter->getNext() == nullptr) {
-        last = prev;
-        prev->setNext(nullptr);
-        return iter;
+    // item does not exist
+    if (iter == nullptr) {
+        return nullptr;
     }
 
-    // when it is not last element in the list
-    prev->setNext(prev->getNext()->getNext());
+    prev->setNext(iter->getNext());
+    iter->setNext(nullptr);
     return iter;
 
 }
@@ -136,7 +157,7 @@ Node* Linkedlist::deleteLast() {
     }
 
     Node *iter = head;
-    Node *prev = nullptr;
+    Node *prev = head;
 
     while(iter->getNext()!= nullptr) {
         prev = iter;

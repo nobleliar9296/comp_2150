@@ -9,19 +9,19 @@
 
 #pragma once
 
+
 #include "Linkedlist.h"
 
-class Queue{
+class Queue : public Linkedlist{
 
-private:
-    Linkedlist *list;
 
 public:
     Queue();
 
     void enter(Node*);
     Node *leave();
-    bool isEmpty();
-
+    bool isEmpty() override;
     Node *toLeave();
+
+
 };

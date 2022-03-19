@@ -3,11 +3,8 @@
 //
 
 #include "PriorityQueue.h"
-#include "Node.h"
 
-PriorityQueue::PriorityQueue() {
-    list = new Linkedlist();
-}
+PriorityQueue::PriorityQueue() : Linkedlist() {}
 
 /***************************************************************************
  * Purpose: add the node passed in to the last of the list
@@ -15,7 +12,7 @@ PriorityQueue::PriorityQueue() {
  *      toAdd: the node to be added to the end of the list
  **************************************************************************/
 void PriorityQueue::addLast(Node *toAdd) {
-    list->addLast(toAdd);
+    Linkedlist::addLast(toAdd);
 }
 
 /***************************************************************************
@@ -27,11 +24,11 @@ void PriorityQueue::addLast(Node *toAdd) {
  * This function also checks that toAdd and before are not null
  **************************************************************************/
 void PriorityQueue::add(Node *toAdd, Node *before) {
-    list->addbefore(toAdd, before);
+    Linkedlist::addbefore(toAdd, before);
 }
 
-// delete the item in the linkedlist
+// delete the item in the linked-list
 Node* PriorityQueue::deletes(Node *toDelete) {
-    return list->deletes(toDelete);
+    return Linkedlist::deletes(toDelete);
 }
 

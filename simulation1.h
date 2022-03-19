@@ -8,12 +8,14 @@
 #include "Meal.h"
 
 #include "Simulation.h"
+#include "Queue.h"
 
 class simulation1 : public Simulation {
 
-private:
-
 
 public:
+    simulation1();
 
+    void add(Node *) override;
+    Node *remove() override;
 };

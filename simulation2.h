@@ -8,5 +8,11 @@
 
 class simulation2 : public Simulation {
 
+public:
+    simulation2();
+
+    void add(Node *) override;
+    Node *remove() override;
+
 };
 

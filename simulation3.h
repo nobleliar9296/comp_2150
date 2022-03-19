@@ -7,5 +7,13 @@
 #include "Simulation.h"
 
 class simulation3 : public Simulation {
+private:
+    Node * whereAdd(Node*);
+
+public:
+    simulation3();
+
+    void add(Node *) override;
+    Node *remove() override;
 
 };

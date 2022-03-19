@@ -15,14 +15,14 @@ private:
     int numOrders;
     float revenue;
     int time;
-    Queue *events;
+    Linkedlist *events;
     Meal *current;
     int startPrepTime;
     int lastend;
 
 public:
 
-    Simulation();
+    Simulation(Linkedlist*);
 
     void read(string);
 
@@ -34,11 +34,15 @@ public:
     void process(Meal*);
     void wrapper(Meal*);
 
-    void purge();
 
     void end();
 
     void newOrder(Meal *meal);
 
     void finishOrders();
+
+    virtual void add(Node*) = 0;
+    virtual Node *remove() = 0;
+
+    Linkedlist *getList();
 };

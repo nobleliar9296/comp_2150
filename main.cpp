@@ -4,12 +4,39 @@
 #include <string>
 #include "Simulation.h"
 #include "Meal.h"
+#include "Stack.h"
+#include "simulation1.h"
+#include "simulation2.h"
+#include "simulation3.h"
+#include "Intitem.h"
+#include "Node.h"
 
 using namespace std;
 
 
 
 int main(int argc, char* argv[]) {
+
+    Stack *temp = new Stack();
+    Listitem *li0 = new Intitem(0);
+    Listitem *li1 = new Intitem(1);
+    Listitem *li2 = new Intitem(2);
+    Listitem *li3 = new Intitem(3);
+
+
+
+    //Listitem *li1 = new Stringitem("hello");
+    Node *test0 = new Node(li0, nullptr);
+    Node *test1 = new Node(li1, nullptr);
+    Node *test2 = new Node(li2, nullptr);
+    Node *test3 = new Node(li3, nullptr);
+
+    temp->push(test0);
+    temp->push(test1);
+    temp->pop();
+
+
+
 
     if(argc != 3)
     {
@@ -26,12 +53,13 @@ int main(int argc, char* argv[]) {
 
     int numVersion = stoi(version);
     Simulation *sim;
+
     if ( numVersion == 1) {
-        sim = new Simulation;
+        sim = new simulation1();
     }else if ( numVersion == 2) {
-        sim = new Simulation;
+        sim = new simulation2();
     } else if ( numVersion == 3) {
-        sim = new Simulation;
+        sim = new simulation3();
     } else {
         cerr << "Error: Version of program should be 1,2 or 3." << endl;
         exit(1);

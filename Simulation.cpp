@@ -26,8 +26,8 @@ const float STEW_COST = 14.99;
 // it will be better to store in a csv file for longer list and make a hashtable at run prepTime
 
 
-Simulation::Simulation() : orderId(1), numOrders(0), time(0), revenue(0), events(new Queue()), startPrepTime(0), current(
-        nullptr), lastend(0) {}
+Simulation::Simulation(Linkedlist * lst) : orderId(1), numOrders(0), time(0), revenue(0),  startPrepTime(0), current(
+        nullptr), lastend(0) { events = lst; }
 
 void Simulation::read(int exp, string meal, int numIndg, int times) {
 
@@ -80,7 +80,8 @@ void Simulation::process(Meal *meal) {
 
     if (current == nullptr) {
         arrival(meal);
-        events->enter(new Node(meal, nullptr));
+        add(new Node(meal, nullptr));
+        // events->enter(new Node(meal, nullptr));
         preperation();
     }
 
@@ -97,31 +98,16 @@ void Simulation::process(Meal *meal) {
     if (current != nullptr && current->getPrepTime() + startPrepTime > time && current != meal) {
         lastend = time;
         arrival(meal);
-        events->enter(new Node(meal, nullptr));
+        add(new Node(meal, nullptr));
+        //events->enter(new Node(meal, nullptr));
     }
     if (current == nullptr && current != meal) {
         lastend = time;
         arrival(meal);
-        events->enter(new Node(meal, nullptr));
+        add(new Node(meal, nullptr));
+        //events->enter(new Node(meal, nullptr));
         preperation();
     }
-
-    /*
-    // add the events to the event list
-    events->enter(new Node(meal, nullptr));
-
-    bool iter = true;
-    // if the chef is free
-    while (true) {
-
-        // if a meal has been completed then prepare next meal
-        preperation();
-
-        //check if the meals have been prepared
-        CompleteService();
-
-    }
-     */
 
 }
 
@@ -143,7 +129,8 @@ void Simulation::preperation() {
 
     // if there is something to do and not doing it
     if (current == nullptr && !events->isEmpty()) {
-        current = dynamic_cast<Meal *>(events->leave()->getValue());
+        current = dynamic_cast<Meal *>(remove()->getValue());
+        //current = dynamic_cast<Meal *>(events->leave()->getValue());
         while (true) {
             if (current->getExpiry() >= lastend) {
                 break;
@@ -152,7 +139,8 @@ void Simulation::preperation() {
                 current = nullptr;
                 return;
             }
-            current = dynamic_cast<Meal *>(events->leave()->getValue());
+            current = dynamic_cast<Meal *>(remove()->getValue());
+            //current = dynamic_cast<Meal *>(events->leave()->getValue());
         }
 
         if (current->getExpiry() >= lastend) {
@@ -168,39 +156,6 @@ void Simulation::preperation() {
         }
     }
 
-
-
-    /*// check if no meal in progress
-    if (current == nullptr) {
-
-        // check to see if there are more meals to prepare
-        if (events->isEmpty()) {
-            return false;
-        }
-
-        // get the meal to prepare from the orders of dishes
-        current = dynamic_cast<Meal *>(events->leave()->getValue());
-
-        // check if the meal has not expired
-        if ( current->getExpiry() < lastend ) {
-            current = nullptr;
-            return;
-        }
-
-        // set the start time according to the meal at hand
-        if (events->isEmpty()) {
-            startPrepTime = time;
-        } else {
-            startPrepTime = lastend;
-        }
-
-        arrival(current);
-
-        cout << "TIME: " << startPrepTime << ", Foodorder: " << current->getOrderId();
-        cout << " is getting prepared by the chef!" << endl;
-
-    }
-*/
 }
 
 void Simulation::CompleteService() {
@@ -222,42 +177,19 @@ void Simulation::CompleteService() {
         preperation();
     }
 
-
-    /*
-
-    // check if the meal is in progress
-    if (current != nullptr) {
-
-        // check if the time of this ends before the next arrival
-        if ( time > current->getPrepTime() + startPrepTime)  {
-
-            lastend = current->getPrepTime() + startPrepTime;
-
-            cout << "TIME: " << lastend << ", Foodorder: " << current->getOrderId();
-            cout << " has been served! Revenue grew by: $" << current->getPrice() << endl;
-
-            // adds to the statistics
-            numOrders++;
-            revenue += current->getPrice();
-
-            // change the state of the chef
-            current = nullptr;
-        }
-    }
-
-     */
 }
 
-void Simulation::purge() {
-    // purges all the expired orders
-    while (true) {
-        if ( time > dynamic_cast<Meal *>(events->toLeave()->getValue())->getExpiry()) {
-            time = startPrepTime + current->getPrepTime();
-        } else {
-            return;
-        }
-    }
+Linkedlist * Simulation::getList() {
+    return events;
 }
+
+void Simulation::add(Node * toAdd) {
+    events->addItem(toAdd);
+}
+Node *Simulation::remove() {
+    return events->deleteLast();
+}
+
 
 
 void Simulation::end() {

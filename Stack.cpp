@@ -8,23 +8,17 @@
  *************************************************************************/
 
 #include "Stack.h"
-#include "Linkedlist.h"
-
-#include <iostream>
-using namespace std;
 
 
 //constructor
-Stack::Stack() {
-    list = new Linkedlist();
-}
+Stack::Stack() : Linkedlist() {}
 
 /************************************************************************
  * PURPOSE: This function add an item to the stack
  * @param toAdd The node to be added at the top of the stack.
  ************************************************************************/
 void Stack::push(Node *toAdd) {
-    list->addItem(toAdd);
+    addItem(toAdd);
 }
 
 /****************************************************************************
@@ -32,8 +26,8 @@ void Stack::push(Node *toAdd) {
  * @return Node that is returns at the top of the stack
  ****************************************************************************/
 Node *Stack::pop() {
-    Node * temp = list->getHead();
-    list->deletes(temp);
+    Node * temp = getHead();
+    deletes(temp);
     return temp;
 }
 
@@ -42,7 +36,7 @@ Node *Stack::pop() {
  * @return Node that is returns at the top of the stack
  **********************************************************************/
 Node *Stack::peek() {
-    return list->getHead();
+    return getHead();
 }
 
 /**********************************************************************
@@ -51,13 +45,8 @@ Node *Stack::peek() {
  * @return false if the stack is not empty
  **********************************************************************/
 bool Stack::isEmpty() {
-    return list->getHead()==nullptr;
+    return getHead()==nullptr;
 }
 
-
-// For debugging purposes
-void Stack::toString() {
-    list->toString();
-}
 
 

@@ -11,10 +11,8 @@
 
 #include "Linkedlist.h"
 
-class Stack {
+class Stack : public Linkedlist {
 
-private:
-    Linkedlist *list;
 
 public :
 
@@ -25,10 +23,7 @@ public :
     Node *pop();
     Node *peek();
 
-    bool isEmpty();
-
-    // prints the stack for debugging
-    void toString();
+    bool isEmpty() override;
 
 
 };

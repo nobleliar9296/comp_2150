@@ -21,14 +21,16 @@ public :
     void addItem(Node *toAdd);
 
     void addbefore(Node *toAdd, Node *before);
-    void addLast(Node *toAdd);
+
+    virtual void addLast(Node *toAdd);
     Node* deleteLast();
-    Node* deletes(Node*);
+
+    virtual Node* deletes(Node*);
     Node *getHead();
 
-    bool isEmpty();
+    virtual bool isEmpty();
 
-    void toString();
+    virtual void toString();
 
     Node *getLast();
 };
