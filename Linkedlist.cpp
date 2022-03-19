@@ -1,7 +1,12 @@
-//
-// Created by gunde on 3/12/2022.
-//
-
+/****************************************************************************
+* ASSIGNMENT 2
+* NAME   :  GUNDEEP SINGH SIDHU
+* CLASS  :  COMP 2150 A01
+* STUDENT NUMBER : 7885100
+* PURPOSE : this class implements a linked list which will be used by
+*           Stack, Queue and Priority queue class
+*
+****************************************************************************/
 #include "Linkedlist.h"
 #include "Node.h"
 
@@ -94,11 +99,20 @@ void Linkedlist::addbefore(Node *toAdd, Node *before) {
     }
 }
 
+/**************************************************************************************
+ * Purpose: this function deletes the node passed in from the list if it exists
+ * It is slighly long as the linked list stores both the start and last nodes
+ * @param
+ *      toDelete : this is the node that is deleted from the list
+ *
+ * @returns the node that is found and deleted
+ *************************************************************************************/
 Node* Linkedlist::deletes(Node *toDelete) {
 
     // this is the value of rtn
     Node *rtn;
 
+    // if just one element in the list
     if (head == last && head == toDelete) {
         rtn = head;
         head = nullptr;
@@ -106,26 +120,34 @@ Node* Linkedlist::deletes(Node *toDelete) {
         return rtn;
     }
 
+    // if it is the first in the list
     if (head == toDelete) {
         rtn = head;
         head = rtn->getNext();
         return rtn;
     }
 
+    // if it is last in the list
     if (last == toDelete) {
         Node *temp = head;
+
+        // get to the second last
         while (head->getNext()->getNext() != nullptr) {
             temp = temp->getNext();
         }
+
+        // make the second last node the last node in the list
         rtn = temp->getNext();
         temp->setNext(nullptr);
         last = temp;
         return rtn;
     }
 
+    // setup nodes to delete in the middle of the list
     Node *iter = head;
     Node *prev = head;
 
+    // iterate until found or at the end of the list
     while (iter != toDelete && iter != nullptr) {
         prev = iter;
         iter = iter->getNext();
@@ -136,13 +158,18 @@ Node* Linkedlist::deletes(Node *toDelete) {
         return nullptr;
     }
 
+    // if found and not first of last i.e. in the middle
     prev->setNext(iter->getNext());
     iter->setNext(nullptr);
     return iter;
 
 }
 
-
+/**************************************************************************************
+ * Purpose: this function deletes the last node passed in from the list/ if it exists
+ *
+ * @returns the node that is deleted
+ *************************************************************************************/
 Node* Linkedlist::deleteLast() {
 
     if (head == nullptr) {
@@ -172,6 +199,7 @@ Node* Linkedlist::deleteLast() {
 
 }
 
+// getters for head and last nodes
 Node * Linkedlist::getHead() {
     return head;
 }
@@ -181,6 +209,7 @@ Node * Linkedlist::getLast() {
 }
 
 
+// prints the linked list
 void Linkedlist::toString() {
 
     Node *iter = head;
@@ -193,6 +222,11 @@ void Linkedlist::toString() {
 
 }
 
+/**************************************************************************************
+ * Purpose: Checks if the list is empty
+ * @returns true if the list is empty
+ *          false, otherwise
+ *************************************************************************************/
 bool Linkedlist::isEmpty() {
     return head== nullptr;
 }

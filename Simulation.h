@@ -11,38 +11,40 @@ using namespace std;
 
 class Simulation {
 private:
-    int orderId;
-    int numOrders;
-    float revenue;
-    int time;
-    Linkedlist *events;
-    Meal *current;
-    int startPrepTime;
-    int lastend;
+    int orderId;  // order num
+    int numOrders; // number of orders served
+    float revenue; // total revenue from the orders served
+    int time; // the time in the simulation
+    Linkedlist *orders; // the list o orders
+    Meal *current;  // which order the chef is working on
+    int startPrepTime; // the time at which the current order started at
+    int lastend;  // the time at which the previous order was served
+
+    // methods to process data
+    void prepare();  //
+    void arrival(Meal *meal);
+    void process(Meal*);
+    void completeService();
+
 
 public:
-
     Simulation(Linkedlist*);
 
-    void read(string);
-
+    // parses and processes the input
     void read(int exp, string meals, int indg, int times);
 
-    void arrival(Meal *meal);
-    void preperation();
-    void CompleteService();
-    void process(Meal*);
-    void wrapper(Meal*);
-
-
+    // ends the simulation by printing statistics
     void end();
 
-    void newOrder(Meal *meal);
-
+    // after there are no more entries in the file; run this to clear
+    // orders in the program
     void finishOrders();
 
+    // these are polymorphic methods that add and remove orders
+    // from the list, according to the simulation version
     virtual void add(Node*) = 0;
     virtual Node *remove() = 0;
 
+    // returns the list of orders
     Linkedlist *getList();
 };

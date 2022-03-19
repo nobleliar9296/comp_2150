@@ -25,7 +25,7 @@ Node *simulation3::whereAdd(Node* toAdd) {
     Node* iter = temp->getHead();
 
     while (iter != nullptr) {
-        if ( dynamic_cast<Meal *>(iter->getValue())->getPrice() < dynamic_cast<Meal*>(toAdd->getValue())->getPrice() ) {
+        if ( dynamic_cast<Meal *>(iter->getValue())->getPrice() > dynamic_cast<Meal*>(toAdd->getValue())->getPrice() ) {
             return iter;
         }
         iter = iter->getNext();

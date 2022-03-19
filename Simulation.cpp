@@ -25,13 +25,23 @@ const int STEW_TIME = 7;
 const float STEW_COST = 14.99;
 // it will be better to store in a csv file for longer list and make a hashtable at run prepTime
 
-
+//constructors
 Simulation::Simulation(Linkedlist * lst) : orderId(1), numOrders(0), time(0), revenue(0),  startPrepTime(0), current(
-        nullptr), lastend(0) { events = lst; }
+        nullptr), lastend(0) { orders = lst; }
 
+/**************************************************************************************
+* Purpose: this function reads and process the arguments passed in to make them into
+* a Meal instance
+* @param exp : Expiry time of the order
+* @param meal : the name of the meal ordered
+* @param numIndg: the number of ingredients in the meal
+* @param times : the time the dish was ordered at
+*
+* calls function so that they can process this data
+*************************************************************************************/
 void Simulation::read(int exp, string meal, int numIndg, int times) {
 
-    // the time in the simulation upto which the events need to be executed
+    // the time in the simulation upto which the orders need to be executed
     time = times;
 
     // the preptime and price of the meal to prepare
@@ -65,31 +75,21 @@ void Simulation::read(int exp, string meal, int numIndg, int times) {
 
 }
 
-void Simulation::finishOrders(){
-    // the time in the simulation upto which the events need to be executed
-
-    // do until the dish cannot be cooked
-    while ( current != nullptr ) {
-        time += current->getPrepTime();
-        CompleteService();
-    }
-
-}
 
 void Simulation::process(Meal *meal) {
 
     if (current == nullptr) {
         arrival(meal);
         add(new Node(meal, nullptr));
-        // events->enter(new Node(meal, nullptr));
-        preperation();
+        // orders->enter(new Node(meal, nullptr));
+        prepare();
     }
 
     // do until the dish cannot be cooked
     while (current->getPrepTime() + startPrepTime <= time ) {
 
-        preperation();
-        CompleteService();
+        prepare();
+        completeService();
         if (current == nullptr) {
             break;
         }
@@ -99,14 +99,14 @@ void Simulation::process(Meal *meal) {
         lastend = time;
         arrival(meal);
         add(new Node(meal, nullptr));
-        //events->enter(new Node(meal, nullptr));
+        //orders->enter(new Node(meal, nullptr));
     }
     if (current == nullptr && current != meal) {
         lastend = time;
         arrival(meal);
         add(new Node(meal, nullptr));
-        //events->enter(new Node(meal, nullptr));
-        preperation();
+        //orders->enter(new Node(meal, nullptr));
+        prepare();
     }
 
 }
@@ -122,25 +122,26 @@ void Simulation::arrival(Meal *meal) {
     cout << endl;
 }
 
-/*
- * this function checks if a meal can be prepared and starts preparing it
- */
-void Simulation::preperation() {
+/**********************************************************************************
+ * @Purpose this function checks if a meal can be prepared and starts preparing it
+ *          from this list of orders
+ **********************************************************************************/
+void Simulation::prepare() {
 
     // if there is something to do and not doing it
-    if (current == nullptr && !events->isEmpty()) {
+    if (current == nullptr && !orders->isEmpty()) {
         current = dynamic_cast<Meal *>(remove()->getValue());
-        //current = dynamic_cast<Meal *>(events->leave()->getValue());
+        //current = dynamic_cast<Meal *>(orders->leave()->getValue());
         while (true) {
             if (current->getExpiry() >= lastend) {
                 break;
             }
-            if (events->isEmpty()) {
+            if (orders->isEmpty()) {
                 current = nullptr;
                 return;
             }
             current = dynamic_cast<Meal *>(remove()->getValue());
-            //current = dynamic_cast<Meal *>(events->leave()->getValue());
+            //current = dynamic_cast<Meal *>(orders->leave()->getValue());
         }
 
         if (current->getExpiry() >= lastend) {
@@ -158,7 +159,11 @@ void Simulation::preperation() {
 
 }
 
-void Simulation::CompleteService() {
+/**************************************************************************************
+* @Purpose: this function check if the current dish can be prepared given the time
+*           Also, this calls the preparation function if a dish has been served
+*************************************************************************************/
+void Simulation::completeService() {
 
     if ( current->getPrepTime() + startPrepTime <= time ) {
 
@@ -174,23 +179,38 @@ void Simulation::CompleteService() {
 
         // free the cook
         current = nullptr;
-        preperation();
+
+        // get the cook on the next order
+        prepare();
     }
 
 }
 
+// returns the orders list
 Linkedlist * Simulation::getList() {
-    return events;
+    return orders;
 }
 
+// polymorphic methods
 void Simulation::add(Node * toAdd) {
-    events->addItem(toAdd);
+    orders->addItem(toAdd);
 }
+
 Node *Simulation::remove() {
-    return events->deleteLast();
+    return orders->deleteLast();
 }
 
+// methods that end the event driven simulation
+void Simulation::finishOrders(){
+    // the time in the simulation upto which the orders need to be executed
 
+    // do until the dish cannot be cooked
+    while ( current != nullptr ) {
+        time += current->getPrepTime();
+        completeService();
+    }
+
+}
 
 void Simulation::end() {
     cout << ".. simulation ended." << endl;

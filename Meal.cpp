@@ -14,6 +14,7 @@ Meal::Meal(int orderNum, int exp, string meals, int indg, int times, float price
     prepTime = times;
 }
 
+//setter and getters
 void Meal::setOrderId(int id) {
     orderId = id;
 }
@@ -34,6 +35,7 @@ float Meal::getPrice() {
     return price;
 }
 
+// prints the meal details
 void Meal::toString() {
     cout << "Expiry: " << expiry << " - Meal: " << meal << " - Ingredients: " << ingridients << " - prepTime: " << prepTime << " - Price: $" << price;
 }
