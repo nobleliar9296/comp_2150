@@ -1,7 +1,12 @@
-//
-// Created by gunde on 3/12/2022.
-//
-
+/****************************************************************************
+* ASSIGNMENT : 2
+* NAME       : GUNDEEP SINGH SIDHU
+* CLASS      : COMP 2150 A01
+* SID NUMBER : 7885100
+* PURPOSE    : this class implements a linked list which will be used by
+*              Stack, Queue and Priority queue class
+*
+****************************************************************************/
 
 #pragma once
 

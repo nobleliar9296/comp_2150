@@ -1,6 +1,14 @@
-//
-// Created by gunde on 3/16/2022.
-//
+/*************************************************************************
+ * @Simulation
+ * @author Gundeep Singh Sidhu
+ * ASSIGNMENT : 2
+ * SECTION : COMP2150 A01
+ * STUDENT ID: 7885100
+ *
+ * @section DESCRIPTION
+ * This is an abstract class that helps us to do various kinds of simulations
+ *
+ *************************************************************************/
 
 #include <iostream>
 #include "Simulation.h"
@@ -75,7 +83,12 @@ void Simulation::read(int exp, string meal, int numIndg, int times) {
 
 }
 
-
+/**************************************************************************************
+* @Purpose: this processes the meal, if it can be start preparing it does so.
+*           otherwise, it adds the meal to the list of the orders
+ *
+ *@param meal: the meal that need to be processed
+*************************************************************************************/
 void Simulation::process(Meal *meal) {
 
     if (current == nullptr) {
@@ -101,7 +114,7 @@ void Simulation::process(Meal *meal) {
         add(new Node(meal, nullptr));
         //orders->enter(new Node(meal, nullptr));
     }
-    if (current == nullptr && current != meal) {
+    if (current == nullptr) {
         lastend = time;
         arrival(meal);
         add(new Node(meal, nullptr));
@@ -111,9 +124,9 @@ void Simulation::process(Meal *meal) {
 
 }
 
-/*
- * In this function implements the arrival event
- */
+/**************************************************************************************
+* @Purpose: prints the details of the order that just arrived
+*************************************************************************************/
 void Simulation::arrival(Meal *meal) {
     // print the arrival of food
     cout << "TIME: " << time << ", Foodorder: " << meal->getOrderId();
@@ -130,8 +143,11 @@ void Simulation::prepare() {
 
     // if there is something to do and not doing it
     if (current == nullptr && !orders->isEmpty()) {
+
+        // cast and assign to the latest order in the list
         current = dynamic_cast<Meal *>(remove()->getValue());
-        //current = dynamic_cast<Meal *>(orders->leave()->getValue());
+
+        //iterate until all orders up till time are processed or list is empty
         while (true) {
             if (current->getExpiry() >= lastend) {
                 break;
@@ -140,8 +156,8 @@ void Simulation::prepare() {
                 current = nullptr;
                 return;
             }
+            // cast it to meal
             current = dynamic_cast<Meal *>(remove()->getValue());
-            //current = dynamic_cast<Meal *>(orders->leave()->getValue());
         }
 
         if (current->getExpiry() >= lastend) {
@@ -152,6 +168,8 @@ void Simulation::prepare() {
             } else {
                 startPrepTime = lastend;
             }
+
+            // Print details about the order being prepared
             cout << "TIME: " << startPrepTime << ", Foodorder: " << current->getOrderId();
             cout << " is getting prepared by the chef!" << endl;
         }
@@ -170,6 +188,7 @@ void Simulation::completeService() {
         // set the time of this dish end
         lastend = current->getPrepTime() + startPrepTime;
 
+        // prints the detail of the order that is completed
         cout << "TIME: " << lastend << ", Foodorder: " << current->getOrderId();
         cout << " has been served! Revenue grew by: $" << current->getPrice() << endl;
 
@@ -191,18 +210,36 @@ Linkedlist * Simulation::getList() {
     return orders;
 }
 
-// polymorphic methods
+// polymorphic methods whose implementation changes according to the version of simulation
+/**************************************************************************************
+* Purpose: this function adds a node to the list of orders
+ *
+* @param toAdd: this is the node that is to be added to the list of orders in the
+ *              way documented by each version of the simulation
+ *
+*************************************************************************************/
 void Simulation::add(Node * toAdd) {
     orders->addItem(toAdd);
 }
 
+/**************************************************************************************
+* Purpose: this function adds a node to the list of orders
+ *
+* @param toAdd: this is the node that is to be added to the list of orders in the
+ *              way documented by each version of the simulation
+ *
+*************************************************************************************/
 Node *Simulation::remove() {
     return orders->deleteLast();
 }
 
-// methods that end the event driven simulation
-void Simulation::finishOrders(){
-    // the time in the simulation upto which the orders need to be executed
+/**************************************************************************************
+* @Purpose: methods that end the event driven simulation by, processing all the orders
+ *          left in the list (orders)
+*           Also, calls the function end that prints the statistics of the program
+ *          up till the point in time
+*************************************************************************************/
+void Simulation::finish(){
 
     // do until the dish cannot be cooked
     while ( current != nullptr ) {
@@ -210,10 +247,13 @@ void Simulation::finishOrders(){
         completeService();
     }
 
+    // call end and finish by printing statistics
+    end();
 }
 
+// prints the statistics uptill any point in the program.
 void Simulation::end() {
-    cout << ".. simulation ended." << endl;
+    cout << "... simulation ended." << endl;
     cout << "- Total number of orders completed: " << numOrders << endl;
     cout << "- Total revenue: $" << revenue << endl;
 }

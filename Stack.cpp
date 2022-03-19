@@ -1,6 +1,9 @@
 /*************************************************************************
- * @class Stack
+ * @main
  * @author Gundeep Singh Sidhu
+ * ASSIGNMENT : 2
+ * SECTION : COMP2150 A01
+ * STUDENT ID: 7885100
  *
  * @section DESCRIPTION
  * The Stack class represents a stack and will be used to handle the
@@ -29,14 +32,6 @@ Node *Stack::pop() {
     Node * temp = getHead();
     deletes(temp);
     return temp;
-}
-
-/**********************************************************************
- * PURPOSE: This function add an item to the stack
- * @return Node that is returns at the top of the stack
- **********************************************************************/
-Node *Stack::peek() {
-    return getHead();
 }
 
 /**********************************************************************

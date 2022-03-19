@@ -1,4 +1,14 @@
-
+/*************************************************************************
+ * @main
+ * @author Gundeep Singh Sidhu
+ * ASSIGNMENT : 2
+ * SECTION : COMP2150 A01
+ * STUDENT ID: 7885100
+ *
+ * @section DESCRIPTION
+ * The main class parses the text file passed in and passes it to simulation
+ * class for processing of event driven simulation
+ *************************************************************************/
 
 
 #include <iostream>
@@ -9,7 +19,6 @@
 #include "simulation1.h"
 #include "simulation2.h"
 #include "simulation3.h"
-#include "Node.h"
 
 using namespace std;
 
@@ -84,8 +93,7 @@ int main(int argc, char* argv[]) {
     }
 
     // end the simulation by completing all the other orders
-    sim->finishOrders();
-    sim->end();
+    sim->finish();
 
     // code has succesfully run
     return 0;

@@ -9,19 +9,20 @@
 
 #pragma once
 
-
 #include "Linkedlist.h"
 
 class Queue : public Linkedlist{
 
 
 public:
+    //constructors
     Queue();
 
+    //methods
     void enter(Node*);
     Node *leave();
-    bool isEmpty() override;
-    Node *toLeave();
 
+    //polymorphic method
+    bool isEmpty() override;
 
 };

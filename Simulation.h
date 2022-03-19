@@ -1,8 +1,18 @@
-//
-// Created by gunde on 3/16/2022.
-//
+/*************************************************************************
+* @Simulation
+* @author Gundeep Singh Sidhu
+* ASSIGNMENT : 2
+* SECTION : COMP2150 A01
+* STUDENT ID: 7885100
+*
+* @section DESCRIPTION
+* This is an abstract class that helps us to do various kinds of simulations
+*
+*************************************************************************/
+
 
 #pragma once
+
 #include <string>
 #include "PriorityQueue.h"
 #include "Meal.h"
@@ -26,19 +36,21 @@ private:
     void process(Meal*);
     void completeService();
 
+    // ends the simulation by printing statistics
+    void end();
+
 
 public:
-    Simulation(Linkedlist*);
+
+    //constructor
+    explicit Simulation(Linkedlist*);
 
     // parses and processes the input
     void read(int exp, string meals, int indg, int times);
 
-    // ends the simulation by printing statistics
-    void end();
-
     // after there are no more entries in the file; run this to clear
     // orders in the program
-    void finishOrders();
+    void finish();
 
     // these are polymorphic methods that add and remove orders
     // from the list, according to the simulation version

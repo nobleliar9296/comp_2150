@@ -16,14 +16,14 @@ class Stack : public Linkedlist {
 
 public :
 
+    //constructors
     Stack();
 
     // stack operations
     void push(Node*);
     Node *pop();
-    Node *peek();
 
+    // check if it is empty
     bool isEmpty() override;
-
 
 };

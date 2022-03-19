@@ -1,8 +1,16 @@
-//
-// Created by gunde on 3/16/2022.
-//
+/*************************************************************************
+ * @simulation1
+ * @author Gundeep Singh Sidhu
+ * ASSIGNMENT : 2
+ * SECTION : COMP2150 A01
+ * STUDENT ID: 7885100
+ *
+ * @section DESCRIPTION
+ * This class implements the first-come first-served simulation
+ *************************************************************************/
 
 #pragma once
+
 #include <string>
 #include "PriorityQueue.h"
 #include "Meal.h"

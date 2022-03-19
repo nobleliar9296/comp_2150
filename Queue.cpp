@@ -1,9 +1,13 @@
-//
-// Created by gunde on 3/15/2022.
-//
+/*************************************************************************
+ * @Queue
+ * @author Gundeep Singh Sidhu
+ *
+ * @section DESCRIPTION
+ * The Queue class represents a queue where items enter from one end, and
+ * leave from the other end.
+ *************************************************************************/
 
 #include "Queue.h"
-#include "Node.h"
 
 Queue::Queue() : Linkedlist() {}
 
@@ -17,9 +21,6 @@ Node * Queue::leave() {
     return deleteLast();
 }
 
-Node * Queue::toLeave() {
-    return getLast();
-}
 
 // check is the queue is empty
 bool Queue::isEmpty() {
